@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import Input from "./Input";
-import MultipleButton from "./MultipleButton";
+import PositiveMultipleButton from "./PositiveMultipleButton";
+import NegativeMultipleButton from "./NegativeMultipleButton";
 import Screen from "./Screen";
 
 function App() {
@@ -16,12 +17,17 @@ function App() {
     setValue2(event.target.value);
   }, []);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmitP = useCallback(() => {
     setValue3((previus) => previus + 1);
+  }, []);
+
+  const handleSubmitN = useCallback(() => {
+    setValue3((previus) => previus - 1);
   }, []);
 
   return (
     <>
+      <span>Positive Value : </span>
       <Input
         type="text"
         placeholder="Input For Positive Button"
@@ -30,6 +36,7 @@ function App() {
       />
       <br />
       <br />
+      <span>Negative Value : </span>
       <Input
         type="text"
         placeholder="Input For Negative Button"
@@ -39,10 +46,16 @@ function App() {
 
       <Screen value={value3} />
 
-      <MultipleButton
+      <PositiveMultipleButton
         text="Increment By One"
         value={value1}
-        handleSubmit={handleSubmit}
+        handleSubmit={handleSubmitP}
+      />
+      <br />
+      <NegativeMultipleButton
+        text="Decrement By One"
+        value={value2}
+        handleSubmit={handleSubmitN}
       />
     </>
   );
